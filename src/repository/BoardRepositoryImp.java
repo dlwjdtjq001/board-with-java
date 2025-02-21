@@ -19,14 +19,7 @@ public class BoardRepositoryImp implements BoardRepository{
     }
     @Override
     public void deleteBoardList(Board board){
-        Optional<Board> targetBoard = boardList.stream()
-                .filter(x -> x.getBno() == board.getBno())
-                .findFirst(); //옵셔널(board) 반환
-        targetBoard.ifPresentOrElse(x -> {
-            System.out.println("삭제를 완료했습니다.");
-            boardList.remove(x);} , () ->{
-            System.out.println("해당 게시글이 존재하지 않습니다.");
-        });
+        boardList.removeIf(x -> x.getBno() == board.getBno());
     }
     @Override
     public void clear() {

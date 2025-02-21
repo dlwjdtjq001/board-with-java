@@ -54,12 +54,11 @@ public class BoardExample {
                         String content = sc.nextLine();
                         System.out.println("작성자: ");
                         String writer = sc.nextLine();
-                        boardController.update(bno, title, content, writer);
                         System.out.println("보조 메뉴: 1.Ok | 2.Cancel");
                         System.out.print("메뉴 선택: ");
                         int supportMenuNum1 = sc.nextInt();
                         if (supportMenuNum1 == 1) {
-                            boardController.create(title, content, writer);
+                            boardController.update(bno, title, content, writer);
                         }
                     } else if (supportMenuNum == 2) {
                         boardController.delete(bno);
