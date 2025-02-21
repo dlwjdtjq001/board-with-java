@@ -38,8 +38,8 @@ public class BoardExample {
             });
 
             list.put(2, () -> {
-                int bno = sc.nextInt();
                 System.out.print("bno: ");
+                int bno = sc.nextInt();
                 sc.nextLine();
                 boardController.read(bno);
                 if(boardController.valid(bno)) {
