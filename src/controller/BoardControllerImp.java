@@ -6,6 +6,7 @@ import service.BoardService;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -44,7 +45,10 @@ public class BoardControllerImp implements BoardController {
     }
     @Override
     public void read(int bno) { //bno 받아서 해당하는 게시글 출력
-        printBoard.accept(boardService.read(bno));
+        printBoard.accept(boardService.read(bno)
+                .orElseGet(() -> createPerfectBoard(0,bno + "번 게시글은 존재하지 않습니다.",
+                        "번호를 다시한번 확인해주세요.",
+                        "해당 게시글은 번호를 잘못 입력하면 보여지는 게시글입니다.")));
     }
     public Consumer<Board> printBoard = x -> {
         System.out.println("###############");
@@ -80,5 +84,10 @@ public class BoardControllerImp implements BoardController {
     @Override
     public void clear() {
         boardService.clear();
+    }
+
+    @Override
+    public boolean valid(int bno) {
+        return boardService.valid(bno);
     }
 }

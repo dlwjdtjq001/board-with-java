@@ -5,6 +5,7 @@ import repository.BoardRepository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class BoardServiceImp implements BoardService {
     BoardRepository boardRepository;
@@ -25,11 +26,10 @@ public class BoardServiceImp implements BoardService {
     }
 
     @Override
-    public Board read(int bno) {
+    public Optional<Board> read(int bno) {
         return boardRepository.getBoardList().stream()
                 .filter(x -> x.getBno() == bno)
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
     @Override
@@ -56,5 +56,10 @@ public class BoardServiceImp implements BoardService {
     @Override
     public void clear() {
         boardRepository.clear();
+    }
+
+    public boolean valid(int bno){
+        return boardRepository.getBoardList().stream()
+                .anyMatch(x -> x.getBno() == bno);
     }
 }

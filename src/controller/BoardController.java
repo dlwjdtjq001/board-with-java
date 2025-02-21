@@ -10,4 +10,5 @@ public interface BoardController {
     void update(int bno, String title, String content, String writer);
     void delete(int bno);
     void clear();
+    boolean valid(int bno);
 }

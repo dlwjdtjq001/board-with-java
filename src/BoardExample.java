@@ -42,26 +42,28 @@ public class BoardExample {
                 System.out.print("bno: ");
                 sc.nextLine();
                 boardController.read(bno);
-                System.out.println("보조 메뉴: 1.Update | 2.Delete | 3.List");
-                System.out.print("메뉴 선택: ");
-                int supportMenuNum = sc.nextInt();
-                if(supportMenuNum == 1){
-                    sc.nextLine();
-                    System.out.println("제목: ");
-                    String title = sc.nextLine();
-                    System.out.println("내용: ");
-                    String content = sc.nextLine();
-                    System.out.println("작성자: ");
-                    String writer = sc.nextLine();
-                    boardController.update(bno,title,content,writer);
-                    System.out.println("보조 메뉴: 1.Ok | 2.Cancel");
+                if(boardController.valid(bno)) {
+                    System.out.println("보조 메뉴: 1.Update | 2.Delete | 3.List");
                     System.out.print("메뉴 선택: ");
-                    int supportMenuNum1 = sc.nextInt();
-                    if(supportMenuNum1 == 1){
-                        boardController.create(title, content, writer);
+                    int supportMenuNum = sc.nextInt();
+                    if (supportMenuNum == 1) {
+                        sc.nextLine();
+                        System.out.println("제목: ");
+                        String title = sc.nextLine();
+                        System.out.println("내용: ");
+                        String content = sc.nextLine();
+                        System.out.println("작성자: ");
+                        String writer = sc.nextLine();
+                        boardController.update(bno, title, content, writer);
+                        System.out.println("보조 메뉴: 1.Ok | 2.Cancel");
+                        System.out.print("메뉴 선택: ");
+                        int supportMenuNum1 = sc.nextInt();
+                        if (supportMenuNum1 == 1) {
+                            boardController.create(title, content, writer);
+                        }
+                    } else if (supportMenuNum == 2) {
+                        boardController.delete(bno);
                     }
-                }else if(supportMenuNum == 2){
-                    boardController.delete(bno);
                 }
             });
 
